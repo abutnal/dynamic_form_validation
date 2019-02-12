@@ -53,7 +53,7 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="form-group"><input type="submit" id="input-email" id="submit" name="submit" class="btn btn-primary pull-right">
+									<div class="form-group"><input type="submit" id="submit" name="submit" class="btn btn-primary pull-right">
 									</div>
 								</div>
 

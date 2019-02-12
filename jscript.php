@@ -77,13 +77,24 @@ function validation(){
 // Dynamic display Email Validation error.
 $(document).on('keyup', '#input-email', function(){
 	var data = this.value.toLowerCase();
-	console.log(data);
+	// console.log(data);
 	$('#input-email').val(data);
 	check_email();
 });
 
 // Dynamic display Phone Validation error.
 $(document).on('keyup', '#input-phone', function(){
+				var maxLimit = 10;
+                var lengthCount = this.value.length;              
+                if (lengthCount > maxLimit) {
+                    this.value = this.value.substring(0, maxLimit);
+                    var charactersLeft = maxLimit - lengthCount + 1;                   
+                }
+                else {                   
+                    var charactersLeft = maxLimit - lengthCount;                   
+                }
+                console.log(charactersLeft)
+                $('.label-phone').html('Enter valid phone number <span class="phonecount"><b>'+ charactersLeft +'</b></span>');
 	check_phone();	
 });
 
@@ -110,6 +121,9 @@ $(document).on('keydown', 'input:text', function(){
 
 $(document).on('keyup', '#input-fname', function(){
 	if($('#input-fname').val()!=""){
+		var data = this.value.toLowerCase();
+		var dataFormat = data.charAt(0).toUpperCase() + data.slice(1);
+		$('#input-fname').val(dataFormat);
 		$('#input-fname').addClass('green_bcolor');
  		$('.label-fname').addClass('green_label_val');
 	}
@@ -117,6 +131,9 @@ $(document).on('keyup', '#input-fname', function(){
 
 $(document).on('keyup', '#input-lname', function(){
 	if($('#input-lname').val()!=""){
+		var data = this.value.toLowerCase();
+		var dataFormat = data.charAt(0).toUpperCase() + data.slice(1);
+		$('#input-lname').val(dataFormat);
 		$('#input-lname').addClass('green_bcolor');
  		$('.label-lname').addClass('green_label_val');
 	}
@@ -166,7 +183,7 @@ function check_phone(){
 		$('.label-phone').removeClass('green_label_val');
 		$('#input-phone').addClass('bcolor');
 		$('.label-phone').addClass('label_val');
-		$('.label-phone').html('Enter valid phone number');
+		// $('.label-phone').html('Enter valid phone number');
 		return false;
 	}
 	else{
@@ -212,3 +229,6 @@ $(document).ready(function(){
         }
     });
 });
+
+
+
