@@ -84,17 +84,16 @@ $(document).on('keyup', '#input-email', function(){
 
 // Dynamic display Phone Validation error.
 $(document).on('keyup', '#input-phone', function(){
-				var maxLimit = 10;
-                var lengthCount = this.value.length;              
-                if (lengthCount > maxLimit) {
-                    this.value = this.value.substring(0, maxLimit);
-                    var charactersLeft = maxLimit - lengthCount + 1;                   
-                }
-                else {                   
-                    var charactersLeft = maxLimit - lengthCount;                   
-                }
-                console.log(charactersLeft)
-                $('.label-phone').html('Enter valid phone number <span class="phonecount"><b>'+ charactersLeft +'</b></span>');
+	var maxLimit = 10;
+	var lengthCount = this.value.length;              
+	if (lengthCount > maxLimit) {
+		this.value = this.value.substring(0, maxLimit);
+		var charactersLeft = maxLimit - lengthCount + 1;                   
+	}
+	else {                   
+		var charactersLeft = maxLimit - lengthCount;                   
+	}
+	$('.label-phone').html('Enter valid phone number <span class="phonecount"><b>'+ charactersLeft +'</b></span>');
 	check_phone();	
 });
 
@@ -108,13 +107,8 @@ $(document).on('keydown', 'input:text', function(){
 			$('#input-'+field.name).removeClass('bcolor');
 			$('.label-'+field.name).removeClass('label_val');
 			$('#input-'+field.name).addClass('green_bcolor');
- 			$('.label-'+field.name).addClass('green_label_val');
+			$('.label-'+field.name).addClass('green_label_val');
 		}
-
-			// if(check_email()==false || check_phone()==false){
- 		// 		$('#input-'+field.name).removeClass('green_bcolor');
-			// $('.label-'+field.name).removeClass('green_label_val');
- 		// 	}
 	});
 });
 
@@ -125,9 +119,22 @@ $(document).on('keyup', '#input-fname', function(){
 		var dataFormat = data.charAt(0).toUpperCase() + data.slice(1);
 		$('#input-fname').val(dataFormat);
 		$('#input-fname').addClass('green_bcolor');
- 		$('.label-fname').addClass('green_label_val');
-	}
+		$('.label-fname').addClass('green_label_val');
+
+		var maxLimit = 30;
+		var lengthCount = this.value.length;              
+		if (lengthCount > maxLimit) {
+			this.value = this.value.substring(0, maxLimit);
+			var charactersLeft = maxLimit - lengthCount + 1;                   
+		}
+		else {                   
+			var charactersLeft = maxLimit - lengthCount;                   
+		}
+	// console.log(charactersLeft)
+}
 });
+
+
 
 $(document).on('keyup', '#input-lname', function(){
 	if($('#input-lname').val()!=""){
@@ -135,23 +142,22 @@ $(document).on('keyup', '#input-lname', function(){
 		var dataFormat = data.charAt(0).toUpperCase() + data.slice(1);
 		$('#input-lname').val(dataFormat);
 		$('#input-lname').addClass('green_bcolor');
- 		$('.label-lname').addClass('green_label_val');
-	}
+		$('.label-lname').addClass('green_label_val');
+
+		var maxLimit = 30;
+		var lengthCount = this.value.length;              
+		if (lengthCount > maxLimit) {
+			this.value = this.value.substring(0, maxLimit);
+			var charactersLeft = maxLimit - lengthCount + 1;                   
+		}
+		else {                   
+			var charactersLeft = maxLimit - lengthCount;                   
+		}
+	// console.log(charactersLeft)
+
+
+}
 });
-
-// $(document).on('keyup', '#input-email', function(){
-// 	if($('#input-email').val()!="" && check_email()==false){
-// 		$('#input-email').addClass('green_bcolor');
-//  		$('.label-email').addClass('green_label_val');
-// 	}
-// });
-
-// $(document).on('keyup', '#input-phone', function(){
-// 	if($('#input-phone').val()!="" && check_phone()==false){
-// 		$('#input-phone').addClass('green_bcolor');
-//  		$('.label-phone').addClass('green_label_val');
-// 	}
-// });
 
 
 // Check Email Validation.
