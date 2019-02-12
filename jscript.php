@@ -115,9 +115,8 @@ $(document).on('keydown', 'input:text', function(){
 
 $(document).on('keyup', '#input-fname', function(){
 	if($('#input-fname').val()!=""){
-		var data = this.value.toLowerCase();
-		var dataFormat = data.charAt(0).toUpperCase() + data.slice(1);
-		$('#input-fname').val(dataFormat);
+		var data = $('#input-fname').val();
+		$('#input-fname').val(capitalize_Words(data));
 		$('#input-fname').addClass('green_bcolor');
 		$('.label-fname').addClass('green_label_val');
 
@@ -131,16 +130,25 @@ $(document).on('keyup', '#input-fname', function(){
 			var charactersLeft = maxLimit - lengthCount;                   
 		}
 	// console.log(charactersLeft)
+
 }
+
+
 });
 
-
+function capitalize_Words(data)
+{
+	return data.replace(/\w\S*/g, function(txt)
+	{
+		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	});
+	console.log(data);
+}
 
 $(document).on('keyup', '#input-lname', function(){
 	if($('#input-lname').val()!=""){
-		var data = this.value.toLowerCase();
-		var dataFormat = data.charAt(0).toUpperCase() + data.slice(1);
-		$('#input-lname').val(dataFormat);
+		var data = $('#input-lname').val();
+		$('#input-lname').val(capitalize_Words(data));
 		$('#input-lname').addClass('green_bcolor');
 		$('.label-lname').addClass('green_label_val');
 
