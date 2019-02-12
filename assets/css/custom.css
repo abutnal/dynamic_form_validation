@@ -16,6 +16,9 @@
 	.bcolor{
 		border: 1px solid red !important;
 	}
+	.green_bcolor{
+		border: 1px solid green !important;
+	}
 	.label{
 		margin-left: 18px;
 		font-size: 13px; 
@@ -26,6 +29,11 @@
 	.label_val{
 		color:red;
 	}
+
+	.green_label_val{
+		color:green;
+	}
+
 	.panel-heading{
 		border-bottom: 2px solid #ddd !important;
 	}

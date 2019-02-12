@@ -9,9 +9,11 @@ $(document).ready(function(){
  if (validation()==false || check_email()==false || check_phone()==false) {
  	var x = $form.serializeArray();	
  	$.each(x, function(i, field){
- 		if(field.value == ''){
+ 		if($.trim(field.value) == ''){
  			$('#input-'+field.name).addClass('bcolor');
  			$('.label-'+field.name).addClass('label_val');
+ 			$('#input-'+field.name).removeClass('green_bcolor');
+ 			$('.label-'+field.name).removeClass('green_label_val');
  		}
  	});
  }
@@ -35,21 +37,24 @@ $(document).ready(function(){
 // Check required fields and set focus.
 function validation(){
 	var fname = $('#input-fname').val();
-	if (fname=='' || fname==null) {
+	var firstname = $.trim(fname);
+	if (firstname=='' || firstname==null) {
 		$('#input-fname').focus();
 		return false;
 	}
 
 
 	var lname = $('#input-lname').val();
-	if (lname=='' || lname==null) {
+	var lastname = $.trim(lname);
+	if (lastname=='' || lastname==null) {
 		$('#input-lname').focus();
 		return false;
 	}
 
 
 
-	var email = $('#input-email').val();
+	var email = $('#input-email').val().toLowerCase();
+	var email = $.trim(email);
 	if (email=='' || email==null) {
 		$('#input-email').focus();
 		return false;
@@ -58,6 +63,7 @@ function validation(){
 
 
 	var phone = $('#input-phone').val();
+	var phone = $.trim(phone);
 	if (phone=='' || phone==null) {
 		$('#input-phone').focus();
 		return false;
@@ -70,6 +76,9 @@ function validation(){
 
 // Dynamic display Email Validation error.
 $(document).on('keyup', '#input-email', function(){
+	var data = this.value.toLowerCase();
+	console.log(data);
+	$('#input-email').val(data);
 	check_email();
 });
 
@@ -84,12 +93,48 @@ $(document).on('keydown', 'input:text', function(){
 	$form = $(this);
 	var x = $form.serializeArray();
 	$.each(x, function(i, field){
-		if(field.value != ''){
+		if(field.value != '' && $("#input-email").val()=="" &&  $("#input-phone").val()==""){
 			$('#input-'+field.name).removeClass('bcolor');
 			$('.label-'+field.name).removeClass('label_val');
+			$('#input-'+field.name).addClass('green_bcolor');
+ 			$('.label-'+field.name).addClass('green_label_val');
 		}
+
+			// if(check_email()==false || check_phone()==false){
+ 		// 		$('#input-'+field.name).removeClass('green_bcolor');
+			// $('.label-'+field.name).removeClass('green_label_val');
+ 		// 	}
 	});
 });
+
+
+$(document).on('keyup', '#input-fname', function(){
+	if($('#input-fname').val()!=""){
+		$('#input-fname').addClass('green_bcolor');
+ 		$('.label-fname').addClass('green_label_val');
+	}
+});
+
+$(document).on('keyup', '#input-lname', function(){
+	if($('#input-lname').val()!=""){
+		$('#input-lname').addClass('green_bcolor');
+ 		$('.label-lname').addClass('green_label_val');
+	}
+});
+
+// $(document).on('keyup', '#input-email', function(){
+// 	if($('#input-email').val()!="" && check_email()==false){
+// 		$('#input-email').addClass('green_bcolor');
+//  		$('.label-email').addClass('green_label_val');
+// 	}
+// });
+
+// $(document).on('keyup', '#input-phone', function(){
+// 	if($('#input-phone').val()!="" && check_phone()==false){
+// 		$('#input-phone').addClass('green_bcolor');
+//  		$('.label-phone').addClass('green_label_val');
+// 	}
+// });
 
 
 // Check Email Validation.
@@ -98,9 +143,13 @@ function check_email(){
 	if(pattern.test($("#input-email").val())) {
 		$('#input-email').removeClass('bcolor');
 		$('.label-email').removeClass('label_val');
+		$('#input-email').addClass('green_bcolor');
+		$('.label-email').addClass('green_label_val');
 		$('.label-email').html('Email');
 		return true;
 	} else {
+		$('#input-email').removeClass('green_bcolor');
+		$('.label-email').removeClass('green_label_val');
 		$('#input-email').addClass('bcolor');
 		$('.label-email').addClass('label_val');
 		$('.label-email').html('Enter valid email id');
@@ -113,6 +162,8 @@ function check_email(){
 function check_phone(){
 	var phone = $("#input-phone").val();
 	if (phone.length!=10) {
+		$('#input-phone').removeClass('green_bcolor');
+		$('.label-phone').removeClass('green_label_val');
 		$('#input-phone').addClass('bcolor');
 		$('.label-phone').addClass('label_val');
 		$('.label-phone').html('Enter valid phone number');
@@ -121,6 +172,8 @@ function check_phone(){
 	else{
 		$('#input-phone').removeClass('bcolor');
 		$('.label-phone').removeClass('label_val');
+		$('#input-phone').addClass('green_bcolor');
+		$('.label-phone').addClass('green_label_val');
 		$('.label-phone').html('Phone');
 		return true;
 	}
